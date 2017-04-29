@@ -1,0 +1,2 @@
+oldpath = addpath('~/)
+detectObject('scene00001.png')
