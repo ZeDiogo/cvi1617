@@ -2,7 +2,7 @@
 
 clear all
 
-imgbk = imread('database\\ped7c0000.tif');
+imgbk = imread('~/Documents/ist/cvi/labs/MATERIAL/database/ped7c1350.tif');
 
 thr = 40;
 minArea = 200;
