@@ -2,7 +2,7 @@
 
 clear all
 
-imgbk = imread('~/Documents/ist/cvi/labs/MATERIAL/database/ped7c1350.tif');
+imgbk = imread('~/Documents/ist/cvi/labs/lab5/Pedestrian_dataBase/ped7c0000.tif');
 
 thr = 40;
 minArea = 200;
@@ -18,7 +18,7 @@ se = strel('disk',3);
 
 figure;
 for i=0:seqLength
-    imgfr = imread(sprintf('database\\ped7c%.4d.tif',baseNum+i));
+    imgfr = imread(sprintf('~/Documents/ist/cvi/labs/lab5/Pedestrian_dataBase/ped7c%.4d.tif',baseNum+i));
     hold off
     imshow(imgfr);
     
