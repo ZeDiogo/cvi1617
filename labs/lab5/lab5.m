@@ -1,10 +1,10 @@
 
 
 clear all, close all
-
+%%
 % ------ Exemplo 1 --> Pedestre com Camisa Verde no campus IST --------%
 
-vid = VideoReader('Movie_0002.avi');
+vid = VideoReader('SonofMated6.avi');
 nFrame = 40*25;
 step = 20;
 
@@ -22,6 +22,8 @@ k =1;
     
     bkg = median(vid4D,4);
     figure, imshow(uint8(bkg));
+    imwrite(uint8(bkg),'background_test.png');
+    %%
     
 %------------------------------------------------------------------------%
 vid = VideoReader('Movie_0002.avi');
