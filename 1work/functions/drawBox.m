@@ -1,5 +1,4 @@
 function Boolean = detectObject(frameName)
-
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -16,7 +15,7 @@ imgbk = imread('./frames/background.png');
 % Display the grayscale image.
 %subplot(3, 3, 1);
 
-thr = 20;
+thr = 25;
 minArea = 100;
 
 baseNum = 00001;
@@ -54,4 +53,4 @@ for i=0:seqLength
     end
     drawnow
 end
-
+end
