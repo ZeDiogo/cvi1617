@@ -4,8 +4,10 @@ function Boolean = detectObject(frameName)
 %   Detailed explanation goes here
 
 %framesPath = './frames/'
+%imgbk = imread('./frames/scene00001.png');
+imgbk = imread('./frames/background.png');
 
-imgbk = imread('./frames/scene00001.png');
+[m1, m2, m3] = size(imgbk)
 % Check to make sure that it is grayscale, just in case the user substituted their own image.
 %[rows, columns, numberOfColorChannels] = size(originalImage);
 % Do the conversion using standard book formula

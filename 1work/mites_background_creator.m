@@ -5,6 +5,10 @@ vid = VideoReader('SonofMated6.avi');
 nFrame = 40*25;
 step = 20;
 
+baseNum = 00001;
+seqLength = 7862;
+for i=0:seqLength
+
 vid4D = zeros([vid.Height vid.Width 3 nFrame/step]);
 figure,
 k =1;
