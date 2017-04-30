@@ -1,3 +1,14 @@
-
+clear all, close all, clc
 oldpath = addpath('./frames/');
-drawBox('scene00001.png')
+
+% Estruturas para guardar coordenadas
+male_coords = [];
+female_coords = [];
+couple_coords = [];
+ghost_coords = [];
+
+
+%detectObject()
+
+drawBox()
+

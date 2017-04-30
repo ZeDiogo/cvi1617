@@ -1,4 +1,4 @@
-function Boolean = detectObject(frameName)
+function Boolean = detectObject()
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -6,7 +6,7 @@ function Boolean = detectObject(frameName)
 %imgbk = imread('./frames/scene00001.png');
 imgbk = imread('./frames/background.png');
 
-[m1, m2, m3] = size(imgbk)
+[m1, m2, m3] = size(imgbk);
 % Check to make sure that it is grayscale, just in case the user substituted their own image.
 %[rows, columns, numberOfColorChannels] = size(originalImage);
 % Do the conversion using standard book formula
@@ -15,25 +15,46 @@ imgbk = imread('./frames/background.png');
 % Display the grayscale image.
 %subplot(3, 3, 1);
 
-thr = 25;
-minArea = 100;
+thr = 45;
+minArea = 30;
 
 baseNum = 00001;
-seqLength = 7862;
+seqLength = 7818;
 
 se = strel('disk',3);
 
 figure;
-for i=0:seqLength
+for i=1000:seqLength
+%for i=1000:1001
     imgfr = imread(sprintf('./frames/scene%.5d.png',baseNum+i));
     hold off
     imshow(imgfr);
     
+    
+    %-1--------------------------------------------------------------------
+    %imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
+    %    (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
+    %    (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
+    %bw = imclose(imgdif,se);
+    %-2--------------------------------------------------------------------
+    %imgdif = im2bw(imgfr, 0.385);
+    %BGImage = imfill(imgdif, 'holes');
+    %imgdif(~BGImage) = 1;
+    %bw = imclose(imgdif,se);
+    %bw = ~bw;   
+    %-3--------------------------------------------------------------------
     imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
         (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
         (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
-    
+    %imshow(imgdif)
+    %imgdif = im2bw(imgdif, 0.385);
+    %BGImage = imfill(imgdif, 'holes');
+    %imgdif(~BGImage) = 1;
     bw = imclose(imgdif,se);
+    %bw = ~bw;
+    %imshow(bw)
+    %----------------------------------------------------------------------
+    
     %imshow(bw)
     [lb num]=bwlabel(bw);
     regionProps = regionprops(lb,'area','FilledImage','Centroid');
