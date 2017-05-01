@@ -63,8 +63,16 @@
     % Detecting Male and Female
     elseif regnum>0 && regnum<3
         %FIXME
-        area = regionProps(1).Area
-        centroid = regionProps(1).Centroid
+       % miteArea1 = regionProps(1).Area
+       % miteCentroid1 = regionProps(1).Centroid
+       % miteArea2 = regionProps(2).Area
+       % miteCentroid2 = regionProps(3).Centroid
+        
+       % if miteArea1 > miteArea2 && miteCentroid1 > miteCentroid2 
+            %mite1 is the female as it is bigger
+       % elseif miteArea1 < miteArea 2 && miteCentroid1 < miteCentroid2
+            %mite2 is the female
+        
     end
     drawnow
 
