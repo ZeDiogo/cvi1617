@@ -1,4 +1,4 @@
-function drawBox(imgfr, statistics, pos, areas, sizeDect)
+function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_coords)
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -54,8 +54,8 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect)
     %bw = ~bw;   
     %-3--------------------------------------------------------------------
     %imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
-        (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
-        (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
+    %    (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
+    %    (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
     %imshow(imgdif)
     %imgdif = im2bw(imgdif, 0.385);
     %BGImage = imfill(imgdif, 'holes');
@@ -84,14 +84,98 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect)
 %     end
 
     regnum = length(areas);
-    if regnum
-        for j=1:length(areas)
-            upLPoint = pos(j, :);
-            dWindow  = sizeDect(j, :);
-            rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 1 0], 'linewidth',2);
+    
+%*****************************************************************************************************    
+    %At least 2 objects are detected
+    if length(areas)>=2
+        %get bigger object
+        [~, idFemale] = max(areas);
+        %remove bigger object value from areas
+        areas(idFemale) = 0;
+        %get second biggest object
+        [~, idMale] = max(areas);
+
+        upLPointMale = pos(idMale, :);
+        upLPointFemale = pos(idFemale, :);
+        dWindowMale = sizeDect(idMale, :);
+        dWindowFemale = sizeDect(idFemale, :);
+
+        %male
+        rectangle('Position',[fliplr(upLPointMale) fliplr(dWindowMale)],'EdgeColor',[0 0 1],...
+                    'linewidth',2);
+        %female
+        rectangle('Position',[fliplr(upLPointFemale) fliplr(dWindowFemale)],'EdgeColor',[1 0 0],...
+                    'linewidth',2);
+    
+    %One object detected, which one is it?    
+    elseif length(areas)==1
+        %Check for Male
+        if isMale(male_coords)==true
+            upLPointMale = pos(1, :);
+            dWindowMale = sizeDect(1, :);
+            rectangle('Position',[fliplr(upLPointMale) fliplr(dWindowMale)],'EdgeColor',[0 0 1],...
+                    'linewidth',2);
             
+        elseif isFemale(female_coords)==true
+            upLPointFemale = pos(1, :);
+            dWindowFemale = sizeDect(1, :);
+            rectangle('Position',[fliplr(upLPointFemale) fliplr(dWindowFemale)],'EdgeColor',[1 0 0],...
+                    'linewidth',2);
+            
+        else
+            Disp('Found a Failure: Ghost detection');
         end
+            
+        
+    else
+        Disp('No Objects detected');
+            
     end
+    
+%Codigo do Andre
+%     if areaVec(1) < areaVec(2)
+%         %mite1 is male
+%         [lin col]= find(lb == inds(1));
+%         upLPoint = min([lin col]);
+%         dWindow  = max([lin col]) - upLPoint + 1;
+%         %male
+%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 0 1],...
+%                 'linewidth',2);
+%         
+%         [lin col]= find(lb == inds(2));
+%         upLPoint = min([lin col]);
+%         dWindow  = max([lin col]) - upLPoint + 1;
+%         %female
+%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
+%                 'linewidth',2);
+%     elseif areaVec(1) > areaVec(2)
+%         %mite1 is male
+%         [lin col]= find(lb == inds(1));
+%         upLPoint = min([lin col]);
+%         dWindow  = max([lin col]) - upLPoint + 1;
+%             
+%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
+%                 'linewidth',2);
+%         
+%         [lin col]= find(lb == inds(2));
+%         upLPoint = min([lin col]);
+%         dWindow  = max([lin col]) - upLPoint + 1;
+%             
+%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 0 1],...
+%                 'linewidth',2);
+%     
+%   
+%     end
+%*****************************************************************************************************
+%     if regnum
+%         for j=1:regnum
+%             upLPoint = pos(j, :);
+%             dWindow  = sizeDect(j, :);
+%             rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 1 0], 'linewidth',2);
+%             
+%         end
+%     end
+%*****************************************************************************************************
     
     drawnow
 end

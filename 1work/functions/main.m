@@ -24,7 +24,7 @@ for i=0:seqLength
     frameNumber = i+1;
     [male_dist, female_dist, time_firstCopula, seenFirstCopula] = doStatistics(male_coords, female_coords, male_dist, female_dist, seenFirstCopula, frameNumber);
     statistics = [male_dist, female_dist, time_firstCopula, seenFirstCopula];
-    drawBox(imgfr, statistics, pos, areas, sizeDect);
+    drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_coords);
     
     
 end

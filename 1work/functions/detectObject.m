@@ -2,7 +2,7 @@ function [pos, areas, sizeDect] = detectObject( originalImage )
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
    
-    thr = 50;
+    thr = 40;
     minArea = 50;
     se = strel('disk',3);
     imgfr = originalImage;
