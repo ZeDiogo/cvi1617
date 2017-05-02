@@ -16,18 +16,20 @@ function [male_dist, female_dist, time_firstCopula, seenFirstCopula] = doStatist
         seenFirstCopula = true;
         %gives time for the start of first copula in seconds
         time_firstCopula = frameNumber/15;
+    else
+        time_firstCopula = 0;
     end
 
     %Update distances for male and female
-    if size(male_coords, 1)<1
+    %if necessary for initial case 
+    if size(male_coords, 1)<=1
         male_dist = male_dist + (sqrt(MaleX^2 + MaleY^2));
         female_dist = female_dist + (sqrt(FemaleX^2 + FemaleY^2));
     else
         male_dist = male_dist + (sqrt((MaleX^2 + MaleY^2)+((male_coords(index-1, 1))^2 + (male_coords(index-1, 2))^2)));
         female_dist = female_dist + (sqrt((FemaleX^2 + FemaleY^2)+((female_coords(index-1, 1))^2 + (female_coords(index-1, 2))^2)));
     end
-        
-  
 
+    
 end
 

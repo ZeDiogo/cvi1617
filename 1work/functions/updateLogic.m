@@ -1,12 +1,18 @@
-function [male_coordsR, female_coordsR, flagTouchR, flagCoupleR] = update( imgfr, male_coords, female_coords, flagTouch, flagCouple )
+function [male_coordsR, female_coordsR, flagTouchR, flagCoupleR, pos, areas, sizeDect] = updateLogic ( imgfr, male_coords, female_coords, flagTouch, flagCouple )
 %UPDATE Summary of this function goes here
 %   Detailed explanation goes here
+
+
 %function [pos area] = update( male_coords, female_coords )
 
-    [pos, areas] = detectObject(imgfr);
+    %----------------------------
+%imgfr = imread(sprintf('./frames/scene%.5d.png',3));
+    %----------------------------
+
+    [pos, areas, sizeDect] = detectObject(imgfr);
     
     if flagTouch == true
-        %return true if merge occurs and false if split otherwise
+        %return true if merge occurs and false if split occurs
         if detectMerge(pos, areas) == true
             flagCouple = true;
         else

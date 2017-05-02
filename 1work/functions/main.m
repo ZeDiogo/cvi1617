@@ -1,4 +1,6 @@
-clear all, close all, clc
+clear all
+close all
+clc
 oldpath = addpath('./frames/');
 
 % Estruturas para guardar coordenadas
@@ -7,22 +9,22 @@ female_coords = [];
 flagTouch = false;
 flagCouple = false;
 seenFirstCopula = false;
-male_dist = 0; 
+male_dist = 0;
 female_dist = 0;
 
 
 baseNum = 1;
 seqLength = 7818;
+
 for i=0:seqLength
 
     imgfr = imread(sprintf('./frames/scene%.5d.png',baseNum+i));
     
-    %[pos area] = update(male_coords, female_coords, flagTouch, flagCouple);
-    [male_coords, female_coords, flagTouch, flagCouple] = update(imgfr, male_coords, female_coords, flagTouch, flagCouple);
+    [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDect] = updateLogic(imgfr, male_coords, female_coords, flagTouch, flagCouple);
     frameNumber = i+1;
     [male_dist, female_dist, time_firstCopula, seenFirstCopula] = doStatistics(male_coords, female_coords, male_dist, female_dist, seenFirstCopula, frameNumber);
     statistics = [male_dist, female_dist, time_firstCopula, seenFirstCopula];
-    drawBox(imgfr, statistics);
+    drawBox(imgfr, statistics, pos, areas, sizeDect);
     
     
 end
