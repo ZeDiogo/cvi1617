@@ -1,4 +1,4 @@
-function Boolean = detectObject()
+function drawBox(imgfr, statistics)
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -18,15 +18,10 @@ imgbk = imread('./frames/background.png');
 thr = 45;
 minArea = 30;
 
-baseNum = 00001;
-seqLength = 7818;
-
 se = strel('disk',3);
 
 figure;
-for i=1000:seqLength
-%for i=1000:1001
-    imgfr = imread(sprintf('./frames/scene%.5d.png',baseNum+i));
+
     hold off
     imshow(imgfr);
     
@@ -56,7 +51,7 @@ for i=1000:seqLength
     %----------------------------------------------------------------------
     
     %imshow(bw)
-    [lb num]=bwlabel(bw);
+    [lb, ~]=bwlabel(bw);
     regionProps = regionprops(lb,'area','FilledImage','Centroid');
     inds = find([regionProps.Area]>minArea);
     
@@ -64,7 +59,7 @@ for i=1000:seqLength
     
     if regnum
         for j=1:regnum
-            [lin col]= find(lb == inds(j));
+            [lin, col]= find(lb == inds(j));
             upLPoint = min([lin col]);
             dWindow  = max([lin col]) - upLPoint + 1;
            
@@ -73,5 +68,4 @@ for i=1000:seqLength
         end
     end
     drawnow
-end
 end
