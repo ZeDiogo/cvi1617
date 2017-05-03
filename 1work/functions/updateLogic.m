@@ -13,8 +13,14 @@ function [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDec
     
     if flagTouch == true
         %return true if merge occurs and false if split occurs
+        %-------------Código para as key frames--------------------%
+        %imshow(imgfr);
+        %----------------------------------------------------------%
         if detectMerge(pos, areas) == true
             flagCouple = true;
+        %-------------Código para as key frames--------------------%
+        %imshow(imgfr);
+        %----------------------------------------------------------%
         else
             flagCouple = false;
         end
