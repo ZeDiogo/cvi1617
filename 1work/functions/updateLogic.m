@@ -1,4 +1,4 @@
-function [male_coordsR, female_coordsR, flagTouchR, flagCoupleR, pos, areas, sizeDect] = updateLogic ( imgfr, male_coords, female_coords, flagTouch, flagCouple )
+function [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDect] = updateLogic ( imgfr, male_coords, female_coords, flagTouch, flagCouple )
 %UPDATE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -28,23 +28,24 @@ function [male_coordsR, female_coordsR, flagTouchR, flagCoupleR, pos, areas, siz
         %detectGender(pos areas);
         %------------------------------------------
         %get and save female pos
-        [~, idx] = max(areas);
-        female_coords = [female_coords; pos(idx, :)];
+        [sizeFemale, idFemale] = max(areas);
+        %FIXME
+        female_coords = [female_coords; pos(idFemale, :)];
         %remove female area to be able to detect male
-        areas(idx) = 0;
+        tmpFemale = sizeFemale; 
+        areas(idFemale) = 0;
         %get and save male pos
-        [~, idx] = max(areas);
-        male_coords = [male_coords; pos(idx, :)];
+        [~, idMale] = max(areas);
+        %FIXME confirm it's a male using last postion
+        male_coords = [male_coords; pos(idMale, :)];
+        areas(idFemale) = tmpFemale;
         %------------------------------------------
     end
     
+    
     flagTouch = detectTouch(pos, areas);
-
-    %return values
-    male_coordsR = male_coords;
-    female_coordsR = female_coords;
-    flagTouchR = flagTouch;
-    flagCoupleR = flagCouple;
+    
+   
     
 end
 

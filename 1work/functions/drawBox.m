@@ -29,11 +29,11 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
     imgbk = insertText(imgbk, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);
     imgfr = insertText(imgfr, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);
 %-----------------------------------------------------------------------------------------------------------
-
-    thr = 45;
-    minArea = 30;
-
-    se = strel('disk',3);
+% 
+%     thr = 45;
+%     minArea = 30;
+% 
+%     se = strel('disk',3);
 
     %figure;
 
@@ -89,11 +89,23 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
     %At least 2 objects are detected
     if length(areas)>=2
         %get bigger object
-        [~, idFemale] = max(areas);
+%         [~, idFemale] = max(areas);
+%         %remove bigger object value from areas
+%         areas(idFemale) = 0;
+%         %get second biggest object
+%         [~, idMale] = max(areas);
+     
+       
+         %get bigger object
+        [sizeFemale, idFemale] = max(areas);
+      
         %remove bigger object value from areas
+        tmpFemale = sizeFemale;
+    
         areas(idFemale) = 0;
         %get second biggest object
-        [~, idMale] = max(areas);
+        [sizeMale, idMale] = max(areas);
+        areas(idFemale) = tmpFemale;
 
         upLPointMale = pos(idMale, :);
         upLPointFemale = pos(idFemale, :);
@@ -123,12 +135,12 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
                     'linewidth',2);
             
         else
-            Disp('Found a Failure: Ghost detection');
+            disp('Found a Failure: Ghost detection');
         end
             
         
     else
-        Disp('No Objects detected');
+        disp('No Objects detected');
             
     end
     

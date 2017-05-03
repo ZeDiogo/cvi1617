@@ -23,11 +23,14 @@ function [male_dist, female_dist, time_firstCopula, seenFirstCopula] = doStatist
     %Update distances for male and female
     %if necessary for initial case 
     if size(male_coords, 1)<=1
-        male_dist = male_dist + (sqrt(MaleX^2 + MaleY^2));
-        female_dist = female_dist + (sqrt(FemaleX^2 + FemaleY^2));
+        male_dist = 0;
+        female_dist = 0;
     else
-        male_dist = male_dist + (sqrt((MaleX^2 + MaleY^2)+((male_coords(index-1, 1))^2 + (male_coords(index-1, 2))^2)));
-        female_dist = female_dist + (sqrt((FemaleX^2 + FemaleY^2)+((female_coords(index-1, 1))^2 + (female_coords(index-1, 2))^2)));
+%         male_dist = male_dist + (sqrt((MaleX^2 + MaleY^2)+((male_coords(index-1, 1))^2 + (male_coords(index-1, 2))^2)));
+%         female_dist = female_dist + (sqrt((FemaleX^2 + FemaleY^2)+((female_coords(index-1, 1))^2 + (female_coords(index-1, 2))^2)));
+%         female_dist = female_dist + (sqrt(((FemaleX - (female_coords(index-1, 1))^2 + FemaleY -(female_coords(index-1, 2)^2);
+        male_dist = male_dist + sqrt(abs(MaleX - (male_coords(index-1, 1)))^2 + abs(MaleY - (male_coords(index-1, 2)))^2);
+        female_dist = female_dist + sqrt(abs(FemaleX - (female_coords(index-1, 1)))^2 + abs(FemaleY - (female_coords(index-1, 2)))^2);
     end
 
     
