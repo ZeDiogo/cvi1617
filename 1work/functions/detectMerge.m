@@ -2,8 +2,7 @@ function Boolean = detectMerge( pos, areas )
 %DETECTMerge Summary of this function goes here
 %   Detailed explanation goes here
     %rad is the radious value around the bigger object
-    rad = 1;
-    distanceR = 5;
+    distanceR = 3;
     %get bigger object
     [~, idBig] = max(areas);
     %remove bigger object value from areas
@@ -19,12 +18,13 @@ function Boolean = detectMerge( pos, areas )
     index = idBig + (idBig -1);
     bigX = pos(index);
     bigY = pos(index+1);
-    
     %check if smaller object is getting closer to the bigger object
-    if (bigX-smallX)<=distanceR  && (bigY-smallY)<=distanceR
-        Boolean = true;
-    else
+    %case split male and female
+    hif (bigX-smallX)>=distanceR  && (bigY-smallY)>=distanceR
         Boolean = false;
+    else
+    % case merge    
+        Boolean = true;
     end
          
 end
