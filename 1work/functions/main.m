@@ -11,6 +11,7 @@ flagCouple = false;
 seenFirstCopula = false;
 male_dist = 0;
 female_dist = 0;
+n_falhas = 0;
 
 
 baseNum = 1;
