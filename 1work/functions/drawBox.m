@@ -1,4 +1,4 @@
-function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_coords)
+function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_coords, flagTouch, CouplingDuration)
 %DETECTOBJECT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,7 +7,7 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
 
 %---------------------------------------------------------------------------------------------------------
     % Create statistics notes
-    text_str = cell(3,1);
+    text_str = cell(5,1);
    
     %[male_dist, female_dist, time_firstCopula, seenFirstCopula];
     seenFirstCopula = statistics(4);
@@ -23,8 +23,20 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
     else
         text_str{3} = ['Time First Copula: ' ' Not Occured Yet'];
     end
-    position = [10 360; 10 400; 10 440]; % [x y]
-    box_color = {'blue','red','green'};
+    if flagTouch==true
+        text_str{4} = 'Touch!';
+    else
+        text_str{4} = '';
+    end
+    
+    if CouplingDuration~=0
+        text_str{5} = ['Coupling duration: ' num2str(CouplingDuration,'%0.2f') 'seconds'];
+    else
+        text_str{5} = '';
+    end
+    
+    position = [10 360; 10 400; 10 440; 10 10; 10 50]; % [x y]
+    box_color = {'blue','red','green', 'yellow', 'green'};
   
     imgbk = insertText(imgbk, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);
     imgfr = insertText(imgfr, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);

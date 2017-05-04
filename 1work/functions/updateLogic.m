@@ -1,4 +1,4 @@
-function [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDect] = updateLogic ( imgfr, male_coords, female_coords, flagTouch, flagCouple )
+function [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDect, coupleStartFrame, currentFrame, CouplingDuration] = updateLogic ( imgfr, male_coords, female_coords, flagTouch, flagCouple, coupleStartFrame, currentFrame, CouplingDuration )
 %UPDATE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,21 +8,26 @@ function [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDec
     %----------------------------
 %imgfr = imread(sprintf('./frames/scene%.5d.png',3));
     %----------------------------
-
+    
     [pos, areas, sizeDect] = detectObject(imgfr);
     
     if flagTouch == true
         %return true if merge occurs and false if split occurs
-        %-------------Código para as key frames--------------------%
+        %-------------Cï¿½digo para as key frames--------------------%
         %imshow(imgfr);
         %----------------------------------------------------------%
         if detectMerge(pos, areas) == true
             flagCouple = true;
-        %-------------Código para as key frames--------------------%
+            coupleStartFrame = currentFrame;
+            
+        %-------------Cï¿½digo para as key frames--------------------%
         %imshow(imgfr);
         %----------------------------------------------------------%
         else
             flagCouple = false;
+            if coupleStartFrame~=0
+                CouplingDuration = (currentFrame - coupleStartFrame)/15;
+            end
         end
     end
 
