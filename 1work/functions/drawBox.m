@@ -24,7 +24,7 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
         text_str{3} = ['Time First Copula: ' ' Not Occured Yet'];
     end
     position = [10 360; 10 400; 10 440]; % [x y]
-    box_color = {'red','green','yellow'};
+    box_color = {'blue','red','green'};
   
     imgbk = insertText(imgbk, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);
     imgfr = insertText(imgfr, position, text_str, 'FontSize', 14, 'BoxColor', box_color, 'BoxOpacity', 0.4);
@@ -115,6 +115,7 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
         %male
         rectangle('Position',[fliplr(upLPointMale) fliplr(dWindowMale)],'EdgeColor',[0 0 1],...
                     'linewidth',2);
+        
         %female
         rectangle('Position',[fliplr(upLPointFemale) fliplr(dWindowFemale)],'EdgeColor',[1 0 0],...
                     'linewidth',2);

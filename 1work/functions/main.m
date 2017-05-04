@@ -17,7 +17,7 @@ n_falhas = 0;
 baseNum = 1;
 seqLength = 7818;
 
-for i=2000:seqLength
+for i=0:seqLength
 
     imgfr = imread(sprintf('./frames/scene%.5d.png',baseNum+i));
     
