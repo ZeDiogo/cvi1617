@@ -22,6 +22,7 @@ seqLength = 7818;
 for i=0:seqLength
 
     imgfr = imread(sprintf('./frames/scene%.5d.png',baseNum+i));
+    
     currentFrame = i;
     [male_coords, female_coords, flagTouch, flagCouple, pos, areas, sizeDect, coupleStartFrame, ...
         currentFrame, CouplingDuration] = ...

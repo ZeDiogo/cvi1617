@@ -21,8 +21,10 @@ function flagTouch = detectTouch( pos, areas )
     bigX = pos(index);
     bigY = pos(index+1);
     
+    if size(pos(idBig + (idBig -1)), 1)==0 && size(pos(idSmall + (idSmall -1)), 1)==0
     %check if smaller object is in the radious of the bigger object
-    if (bigX-rad)<=smallX && (bigX+rad)>=smallX && (bigY-rad)<=smallY && (bigY+rad)>=smallY
+        flagTouch = false;
+    elseif (bigX-rad)<=smallX && (bigX+rad)>=smallX && (bigY-rad)<=smallY && (bigY+rad)>=smallY
         flagTouch = true;
     else
         flagTouch = false;
