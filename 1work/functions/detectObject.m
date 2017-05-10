@@ -4,30 +4,14 @@ function [pos, areas, sizeDect] = detectObject( originalImage )
    
     thr = 30;
     minArea = 30;
-    se = strel('disk',3);
+    se = strel('disk',4);
     imgfr = originalImage;
     imgbk = imread('./frames/background.png');
     %-1==========================================================================================
-    % Method #1: using im2bw()
-       normalizedThresholdValue = 0.35; % In range 0 to 1.
-       %thresholdValue = normalizedThresholdValue * max(max(originalImage)); % Gray Levels.
+       normalizedThresholdValue = 0.40; % In range 0 to 1.
+       %thresholdValue = normalizedThresholdValue * max(max(originalImage));
        
-       %----------------------------------------------------
-       %originalImage = rgb2gray(originalImage);
-       %binaryImage = imbinarize(originalImage, normalizedThresholdValue);       
-       %figure(9), imshow(binaryImage)
-       %----------------------------------------------------
-       
-       binaryImage = im2bw(originalImage, normalizedThresholdValue);       % One way to threshold to binary
-       
-       %----------------------------------------------------
-    % Method #2: using a logical operation.
-    %thresholdValue = 100;
-    %binaryImage = originalImage > thresholdValue; % Bright objects will be chosen if you use >.
-    %Option2:
-    % Use < if you want to find dark objects instead of bright objects.
-    %binaryImage = originalImage < thresholdValue; % Dark objects will be chosen if you use <.
-    
+       binaryImage = im2bw(originalImage, normalizedThresholdValue);   
     % Removing central objects to get background image with corners
     BGImage = imfill(binaryImage, 'holes');
     % Applying background image as mask to remove corners and keep central
@@ -43,8 +27,11 @@ function [pos, areas, sizeDect] = detectObject( originalImage )
 %     imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
 %         (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
 %         (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
-%     bw = imclose(imgdif,se);
+%     bw = imclose(imgdif,se);    
     %============================================================================================
+
+    
+    
     
     [lb num]=bwlabel(bw);
     mite = regionprops(lb,'area','FilledImage','Centroid');
@@ -62,30 +49,6 @@ function [pos, areas, sizeDect] = detectObject( originalImage )
         pos = [pos; upLPoint];
         areas = [areas; mite(j).Area];
         sizeDect = [sizeDect; dWindow];
-
-  
-    % Detecting ghost detections
-%    if regnum>=3 
-        %FIXME
-%       for j=1:regnum
-%          [lin col]= find(lb == inds(j));
-%           upLPoint = min([lin col]);
-        
-%            ghost_coords = ghost_coords + upLPoint
-            
-%        end
-    % Detecting Male and Female
-%    elseif regnum>0 && regnum<3
-        %FIXME
-       % miteArea1 = regionProps(1).Area
-       % miteCentroid1 = regionProps(1).Centroid
-       % miteArea2 = regionProps(2).Area
-       % miteCentroid2 = regionProps(3).Centroid
-        
-       % if miteArea1 > miteArea2 && miteCentroid1 > miteCentroid2 
-            %mite1 is the female as it is bigger
-       % elseif miteArea1 < miteArea 2 && miteCentroid1 < miteCentroid2
-            %mite2 is the female
         
     end
 

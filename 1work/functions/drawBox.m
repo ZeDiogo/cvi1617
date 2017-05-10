@@ -51,49 +51,7 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
 
     hold off
     imshow(imgfr);
-    
-    
-    %-1--------------------------------------------------------------------
-%     imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
-%         (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
-%         (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
-%     bw = imclose(imgdif,se);
-    %-2--------------------------------------------------------------------
-    %imgdif = im2bw(imgfr, 0.385);
-    %BGImage = imfill(imgdif, 'holes');
-    %imgdif(~BGImage) = 1;
-    %bw = imclose(imgdif,se);
-    %bw = ~bw;   
-    %-3--------------------------------------------------------------------
-    %imgdif = (abs(double(imgbk(:,:,1))-double(imgfr(:,:,1)))>thr) | ...
-    %    (abs(double(imgbk(:,:,2))-double(imgfr(:,:,2)))>thr) | ...
-    %    (abs(double(imgbk(:,:,3))-double(imgfr(:,:,3)))>thr);
-    %imshow(imgdif)
-    %imgdif = im2bw(imgdif, 0.385);
-    %BGImage = imfill(imgdif, 'holes');
-    %imgdif(~BGImage) = 1;
-    %bw = imclose(imgdif,se);
-    %bw = ~bw;
-    %imshow(bw)
-    %----------------------------------------------------------------------
-    
-    %imshow(bw)
-%     [lb, ~]=bwlabel(bw);
-%     regionProps = regionprops(lb,'area','FilledImage','Centroid');
-%     inds = find([regionProps.Area]>minArea);
-%     
-%     regnum = length(inds);
-%     
-%     if regnum
-%         for j=1:regnum
-%             [lin, col]= find(lb == inds(j));
-%             upLPoint = min([lin col]);
-%             dWindow  = max([lin col]) - upLPoint + 1;
-%            
-%             rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 1 0],...
-%                 'linewidth',2);
-%         end
-%     end
+
 
     regnum = length(areas);
     
@@ -156,51 +114,6 @@ function drawBox(imgfr, statistics, pos, areas, sizeDect, male_coords, female_co
         disp('No Objects detected');
             
     end
-    
-%Codigo do Andre
-%     if areaVec(1) < areaVec(2)
-%         %mite1 is male
-%         [lin col]= find(lb == inds(1));
-%         upLPoint = min([lin col]);
-%         dWindow  = max([lin col]) - upLPoint + 1;
-%         %male
-%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 0 1],...
-%                 'linewidth',2);
-%         
-%         [lin col]= find(lb == inds(2));
-%         upLPoint = min([lin col]);
-%         dWindow  = max([lin col]) - upLPoint + 1;
-%         %female
-%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
-%                 'linewidth',2);
-%     elseif areaVec(1) > areaVec(2)
-%         %mite1 is male
-%         [lin col]= find(lb == inds(1));
-%         upLPoint = min([lin col]);
-%         dWindow  = max([lin col]) - upLPoint + 1;
-%             
-%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
-%                 'linewidth',2);
-%         
-%         [lin col]= find(lb == inds(2));
-%         upLPoint = min([lin col]);
-%         dWindow  = max([lin col]) - upLPoint + 1;
-%             
-%         rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 0 1],...
-%                 'linewidth',2);
-%     
-%   
-%     end
-%*****************************************************************************************************
-%     if regnum
-%         for j=1:regnum
-%             upLPoint = pos(j, :);
-%             dWindow  = sizeDect(j, :);
-%             rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 1 0], 'linewidth',2);
-%             
-%         end
-%     end
-%*****************************************************************************************************
-    
+
     drawnow
 end
