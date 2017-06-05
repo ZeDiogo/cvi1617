@@ -2,14 +2,15 @@ clear all
 close all
 clc
 oldpath = addpath('./frames/');
-
+matrix = load('2015-04-23-14-04-25_jai_eo.gt.txt');
 baseNum = 1997;
-seqLength = 2999;
-% for i=baseNum:seqLength
-    i=1998
-    frameNumber=i;
-    imgfr = imread(sprintf('./frames/frame%.5d.jpg',i));
-    [upLeftCornerX, upLeftCornerY, xLength, yLength] = getBoxFromFile('2015-04-23-14-04-25_jai_eo.gt.txt', frameNumber);
+finalFrame = 2999;
+for frameNumber=baseNum:finalFrame
+
+    imgfr = imread(sprintf('./frames/frame%.5d.jpg', frameNumber));
     
+    upLeftCorner = [ matrix(frameNumber-baseNum+1, 2), matrix(frameNumber-baseNum+1, 3) ];
+    dimension = [ matrix(frameNumber-baseNum+1, 4), matrix(frameNumber-baseNum+1, 5) ];
+    drawBox(imgfr, upLeftCorner, dimension)
     
-% end
+end
