@@ -1,8 +1,8 @@
-% function binary_image = vesselDetectionDark( originalImage )
+function binary_image = vesselDetectionDark( originalImage )
 %VESSELDETECTION Summary of this function goes here
 %   Detailed explanation goes here
-    img = imread(sprintf('./frames/frame%.5d.jpg', 1998));
-%     img = originalImage;
+%     img = imread(sprintf('./frames/frame%.5d.jpg', 1998));
+    img = originalImage;
 
     red = img(:,:,1);
     green = img(:,:,2);
@@ -21,10 +21,10 @@
             end
         end
     end
-    figure, imshow(binary_image), title('Binary Image from algorithm')
+%     figure, imshow(binary_image), title('Binary Image from algorithm')
     
 
-    drawnow
+%     drawnow
 
-% end
+end
 
