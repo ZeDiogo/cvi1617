@@ -35,7 +35,7 @@ img = binary_image;
         end
     end
     bw = final;
-%     figure, imshow(bw), title('after test 1 & 2')
+%     figure(3), imshow(bw), title('after test 1 & 2')
     
     %1st test
 %     inds = find([blob.Area]>maxArea); 
@@ -71,26 +71,28 @@ img = binary_image;
 %     end
     
     %3rd test
-    se = strel('disk',4);
+    se = strel('disk',2);
     bigBlobImage = imdilate(bw,se);
 %     figure, imshow(bw), title('Blob image')
     [lb num]=bwlabel(bigBlobImage);
     blob = regionprops(lb,'area','FilledImage','Centroid');
 %     figure, imshow(bigBlobImage), title('after dilate')
     inds = find([blob.Area]>2000);
+%     inds = find([blob.Area]>maxArea);
     for i=1:length(inds)
         [lin, col] = find(lb == inds(i));
         for j=1:size(lin,1)
             bw(lin(j), col(j)) = 0;
         end
     end
+    
 %     se = strel('disk',5);
 %     bw = imerode(bw,se);
     
 %     if length(inds)==0
 %         disp('esta vazia')
 %     end
-%     figure, imshow(bw), title('after erode')
+    figure(4), imshow(bw), title('after erode'), drawnow
     
     %Get only biggest object
 %     [lb num]=bwlabel(bw);

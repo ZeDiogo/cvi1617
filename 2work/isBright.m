@@ -5,9 +5,9 @@ function isBright = isBright( img )
 %     figure, histogram(img, 255), title('Image 2390')
     [N, EDGES] = histcounts(img, 255);
     [~, index] = max(N);
-    colorMax = EDGES(index);
+    colorMax = EDGES(index)
     
-    if colorMax > 127
+    if colorMax > 35
         isBright = true;
     else
         isBright = false;
