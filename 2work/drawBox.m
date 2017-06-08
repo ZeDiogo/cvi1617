@@ -3,7 +3,7 @@ function drawBox( imgfr, binaryImage, upLeftCorner, dimension, upLPoint, dWindow
 %   Detailed explanation goes here
 
     hold off
-    
+    figure(1)
     subplot(1, 2, 1); imshow(imgfr);
         %GroundTruth
         rectangle('Position',[upLeftCorner dimension],'EdgeColor',[0 0 1],...
