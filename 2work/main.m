@@ -26,11 +26,11 @@ for frameNumber=1998:finalFrame
     if isBright(img)
 %         binaryImage = vesselDetectionBright(img);
         binaryImage = buoyDetection(img);
-        disp('In bright');
+        
         isBri = 'Bright';
     else    
         binaryImage = vesselDetectionDark(img);
-        disp('In dark');
+        
         isBri = 'Dark';
     end
        

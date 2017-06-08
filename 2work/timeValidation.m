@@ -22,7 +22,7 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
 %     dWindow = 5;
     if size(upLPointHistory, 1) == 3
         %choose the biggest object in the beginning
-        disp('Initial frame')
+%         disp('Initial frame')
         inds = find([blob.Area]==max([blob.Area]));
         final = zeros(size(img,1), size(img,2));
         for i=1:length(inds)
@@ -46,9 +46,9 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
             if (upLPoint(1) < (upLPointHistory(1,1)+R)) && (upLPoint(1) > (upLPointHistory(1,1)-R)) && ...
                     (upLPoint(2) < (upLPointHistory(1,2)+R)) && (upLPoint(2) > (upLPointHistory(1,2)-R)) 
                 %inside radius - found new position
-                disp('found object inside last object radius')
+%                 disp('found object inside last object radius')
                 %guardar o indice e a area
-                objectsInRadius = [objectsInRadius; [ i, size(lin) ] ]
+                objectsInRadius = [objectsInRadius; [ i, size(lin) ] ];
 %                 for j=1:size(lin,1)
 %                     final(lin(j), col(j)) = 1;
 %                 end
@@ -58,7 +58,7 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
         
         %If found objects inside radius, choose biggest one
         if size(objectsInRadius)>0
-            disp('choosing biggest object in radius')
+%             disp('choosing biggest object in radius')
             for i=1:size(objectsInRadius)
                 if objectsInRadius(i,2) == max(objectsInRadius(:,2))
                     indexMax = objectsInRadius(i,1);
@@ -75,11 +75,11 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
         
         %Did not find new position
         if max(max(final)) == 0
-            disp('Did not find new position')
+%             disp('Did not find new position')
             %Didn't find any object near last position - predict next
             %position
             if (upLPointHistory(1) ~= 0) && (upLPointHistory(2) ~= 0)
-                disp('predicting new position')
+%                 disp('predicting new position')
                 %last position is greater than 2 positions before
                 if upLPointHistory(1,1) > upLPointHistory(2,1)
                     upLPoint(1) = upLPointHistory(1,1) + (upLPointHistory(1,1) - upLPointHistory(2,1));
@@ -100,7 +100,7 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
                 %ignore - don't detect
     %                     upLPoint = [0,0];
     %                     dWindow = [0,0];
-                disp('choosing biggest object')
+%                 disp('choosing biggest object')
                 size(inds)
                 max([blob.Area])
                 %Didn't find any object near last position - choose the
@@ -126,7 +126,7 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
 %         upLPoint = [0,0];
         %Didn't find any object near last position - choose the
         %biggest one       
-        disp('position outside')
+%         disp('position outside')
         inds = find([blob.Area]==max([blob.Area]));
         upLPoint = min([lin col]);
         dWindow  = max([lin col]) - upLPoint + 1;
@@ -143,7 +143,7 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
 %     rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 1 0],...
 %                     'linewidth',1);
 
-    disp('-----------------')
+%     disp('-----------------')
 %     figure, imshow(final), title('Time validation image')  
 %       rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
 %                     'linewidth',1);
