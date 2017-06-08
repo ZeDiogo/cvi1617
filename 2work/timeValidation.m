@@ -68,6 +68,9 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
             [lin, col] = find(lb == inds(indexMax));
             upLPoint = min([lin col]);
             dWindow  = max([lin col]) - upLPoint + 1;
+            for j=1:size(lin,1)
+                final(lin(j), col(j)) = 1;
+            end
         end
         
         %Did not find new position
@@ -136,10 +139,10 @@ function [ upLPoint, dWindow, final ] = timeValidation( img, upLPointHistory )
         end
     end
     
-%     imshow(img), title('Inside timeValidation');
+%     figure(7), imshow(final), title('Inside timeValidation');
 %     rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[0 1 0],...
 %                     'linewidth',1);
-%     pause(0.6)
+
     disp('-----------------')
 %     figure, imshow(final), title('Time validation image')  
 %       rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
