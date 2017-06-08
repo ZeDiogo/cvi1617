@@ -11,8 +11,11 @@ function drawBox( imgfr, binaryImage, upLeftCorner, dimension, upLPoint, dWindow
     
     subplot(1, 2, 2); imshow(binaryImage);
         %Estimated
-        rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
+        if upLPoint ~= 0
+            disp('entrou')
+            rectangle('Position',[fliplr(upLPoint) fliplr(dWindow)],'EdgeColor',[1 0 0],...
                     'linewidth',1);
+        end
     title(sprintf('Frame: %.5d', frameNumber));
     drawnow
 end

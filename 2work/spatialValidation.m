@@ -71,7 +71,7 @@ img = binary_image;
 %     end
     
     %3rd test
-    se = strel('disk',2);
+    se = strel('disk',4);
     bigBlobImage = imdilate(bw,se);
 %     figure, imshow(bw), title('Blob image')
     [lb num]=bwlabel(bigBlobImage);
