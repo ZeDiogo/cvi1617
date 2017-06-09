@@ -17,7 +17,7 @@ upLPointHistory = [0,0;0,0;0,0];
 frameNumberVec = [];
 iouVec = [];
 
-for frameNumber=1998:finalFrame
+for frameNumber=2100:finalFrame
 % for frameNumber=2245:2399
 % frameNumber = 2390
 

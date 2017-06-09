@@ -30,7 +30,7 @@ function [ truePos, falsePos, falseNeg, precision, recall, iou ] = precRecall( u
     unionMinusIntersection = length(find(sum == 1));
     dif = trueMat - predictMat;
     FP = length(find(dif == -1));
-    FN = length(find(dif == 1));
+%     FN = length(find(dif == 1));
     numberTrueMat = length(find(trueMat == 1));
     numberPredictedMat = length(find(predictMat == 1));
     
@@ -38,19 +38,21 @@ function [ truePos, falsePos, falseNeg, precision, recall, iou ] = precRecall( u
     percentageFP = FP*100/numberPredictedMat;
     
     if percentageTP > 30
-       truePos = truePos + 1
+       truePos = truePos + 1;
     elseif percentageTP <= 30 || percentageFP == 100
-        falsePos = falsePos + 1
+        falsePos = falsePos + 1;
     else
         falseNeg = 0;
     end
     
-    precision = truePos / (truePos + falsePos)
-    recall = truePos / (truePos + falseNeg)
+    precision = truePos / (truePos + falsePos);
+    recall = truePos / (truePos + falseNeg);
     
     %-----------------------------------------
     %IoU
-    iou = TP / (TP+unionMinusIntersection)
+    iou = TP / (TP+unionMinusIntersection);
+    
+    
     
     
     

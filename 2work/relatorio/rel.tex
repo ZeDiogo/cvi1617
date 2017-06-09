@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[left=3cm,right=3cm,top=0cm,bottom=2cm]{geometry} % page settings
+\usepackage{amsmath} % provides many mathematical environments & tools
+\usepackage[pdftex]{graphicx}
+\usepackage{fontenc}
+\usepackage{selinput}
+
+\setlength{\parindent}{0mm}
+
+\begin{document}
+
+\title{CVI: Gr\'aficos Segundo Trabalho}
+\author{
+\textsc{Jos\'e Oliveira}
+\normalsize 75255 \\
+\textsc{Andr\'e Miguel}
+\normalsize 76445 \\
+\textsc{Jo\~ao Costa}
+\normalsize 76476 \\
+}
+\date{\today}
+\maketitle
+
+\subsection*{Breve Introdu\c{c}\~ao}
+Neste breve documento s\~ao apresentados os gr\'aficos gerados em tempo de execu\c{c}\~ao no MATLAB. Tal como se pode verificar, os gr\'aficos terminam na frame 2650 uma vez que os computadores em que execut\'amos o programa tinham pouca mem\'oria impedindo a total execu\c{c}ão do nosso trabalho.
+Especificamente no gr\'afico do "recall", o valor constante de 1 deve-se ao facto de nunca termos falsos negativos. Como \'e' estimado o valor seguinte atrav\'es do "time validation", nunca contamos falsos negativos. Segundo a f\'ormula em baixo, com falsos negativos (FN) sempre 0, o valor da fun\c{c}\~ao ser\'a sempre 1.
+\begin{align*}
+    recall &= \frac{TP}{TP + FN}
+\end{align*}
+
+\subsection*{Gr\'aficos Grupo 7}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=100mm]{graficos2.png}
+\caption{Precision \label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=100mm]{graficos3.png}
+\caption{Recall \label{overflow}}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=100mm]{graficos1.png}
+\caption{IoU \label{overflow}}
+\end{figure}
+
+\end{document}
